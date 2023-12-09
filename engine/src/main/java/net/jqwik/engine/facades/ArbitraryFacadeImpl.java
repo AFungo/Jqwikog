@@ -23,6 +23,17 @@ public class ArbitraryFacadeImpl extends Arbitrary.ArbitraryFacade {
 	}
 
 	@Override
+	public <T> StackArbitrary stack(Arbitrary<T> elementArbitrary) {
+		return new DefaultStackArbitrary(elementArbitrary);
+	}
+
+	@Override
+	public <T> RandoopArbitrary<T> randoop(Arbitrary<T> elementArbitrary) {
+		Class<T> clazz = (Class<T>) elementArbitrary.sample().getClass();
+		return new DefaultRandoopArbitrary<T>(clazz);
+	}
+
+	@Override
 	public <T> SetArbitrary<T> set(Arbitrary<T> elementArbitrary) {
 		// The set can never be larger than the max number of possible elements
 		return new DefaultSetArbitrary<>(elementArbitrary)

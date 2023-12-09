@@ -22,6 +22,8 @@ import static org.apiguardian.api.API.Status.*;
 @CheckReturnValue
 public interface Arbitrary<@Nullable T> {
 
+
+
 	@API(status = INTERNAL)
 	abstract class ArbitraryFacade {
 		private static final ArbitraryFacade implementation;
@@ -31,6 +33,11 @@ public interface Arbitrary<@Nullable T> {
 		}
 
 		public abstract <T> ListArbitrary<T> list(Arbitrary<T> elementArbitrary);
+
+		public abstract <T> StackArbitrary stack(Arbitrary<T> elementArbitrary);
+
+		//TODO: i dont know what its the right name
+		public abstract <T> RandoopArbitrary randoop(Arbitrary<T> elementArbitrary);
 
 		public abstract <T> SetArbitrary<T> set(Arbitrary<T> elementArbitrary);
 
@@ -279,6 +286,16 @@ public interface Arbitrary<@Nullable T> {
 	default ListArbitrary<T> list() {
 		return ArbitraryFacade.implementation.list(this);
 	}
+
+
+	default RandoopArbitrary randoop(){
+		return ArbitraryFacade.implementation.randoop(this);
+	}
+
+	default StackArbitrary stack(){
+		return ArbitraryFacade.implementation.stack(this);
+	}
+
 
 	/**
 	 * Create a new arbitrary of type {@code Set<T>} using the existing arbitrary for generating the elements of the set.
