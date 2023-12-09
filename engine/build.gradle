@@ -1,9 +1,19 @@
+
+
 plugins {
 	id 'jqwik.common-configuration'
 	id 'jqwik.module-configuration'
 }
 
 description = "Jqwik Engine module"
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+//	flatDir {
+//		dirs '/home/augusto/Documents/tesis/randoop/build/libs/randoop-4.3.2.jar'
+//	}
+}
 
 jar {
 	archiveBaseName.set('jqwik-engine')
@@ -78,6 +88,10 @@ test {
 }
 
 dependencies {
+//	implementation files('./dependencies/randoop-all-generator-4.3.2.jar')
+	implementation files('/home/augusto/Documents/tesis/jqwik/engine/dependencies/randoop-4.3.2.jar')
+	implementation 'com.github.javaparser:javaparser-core:3.25.5'
+
 	api(project(":api"))
 	api("org.opentest4j:opentest4j:${opentest4jVersion}")
 	api("org.junit.platform:junit-platform-commons:${junitPlatformVersion}")
