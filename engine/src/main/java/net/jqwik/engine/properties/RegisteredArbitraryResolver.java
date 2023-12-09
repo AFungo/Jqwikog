@@ -5,6 +5,7 @@ import java.util.*;
 import net.jqwik.api.*;
 import net.jqwik.api.providers.*;
 import net.jqwik.api.providers.ArbitraryProvider.*;
+import net.jqwik.engine.properties.arbitraries.*;
 
 public class RegisteredArbitraryResolver {
 
@@ -30,6 +31,12 @@ public class RegisteredArbitraryResolver {
 				Set<Arbitrary<?>> arbitraries = provider.provideFor(targetType, subtypeProvider);
 				fittingArbitraries.addAll(arbitraries);
 			}
+		}
+		if (fittingArbitraries.isEmpty()) {
+			//TODO: aca se usa randoop cuando no encuentra ningun otro generador es la ultima opcion, por ahora ;)
+			Class<?> clazz = targetType.getRawType();//parameter.getRawParameter().getType();
+			fittingArbitraries.add(new DefaultRandoopArbitrary<>((Class<?>) clazz));
+			System.out.println("We going to use randoop :)");
 		}
 		return fittingArbitraries;
 	}
