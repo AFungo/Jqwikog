@@ -8,6 +8,7 @@ import java.util.function.*;
 import net.jqwik.api.*;
 import net.jqwik.api.Tuple.*;
 import net.jqwik.engine.properties.*;
+import net.jqwik.engine.properties.arbitraries.*;
 import net.jqwik.engine.properties.shrinking.*;
 
 import static java.lang.Math.*;
@@ -53,6 +54,10 @@ public class RandomGenerators {
 
 	public static RandomGenerator<Character> chars(char min, char max) {
 		return integers(min, max).map(anInt -> ((char) (int) anInt));
+	}
+
+	public static <T> RandomGenerator<T> randoop(Class<T> clazz) {
+		return RandomIntegralGenerators.randoop(clazz);
 	}
 
 	public static RandomGenerator<Integer> integers(int min, int max) {
@@ -137,6 +142,22 @@ public class RandomGenerators {
 		Function<List<Shrinkable<T>>, Shrinkable<List<T>>> createShrinkable =
 			elements -> new ShrinkableList<>(elements, minSize, maxSize, uniquenessExtractors, elementArbitrary);
 		return container(elementGenerator, createShrinkable, minSize, maxSize, maxUniqueElements, genSize, sizeDistribution, uniquenessExtractors);
+	}
+
+	public static <T> RandomGenerator<Stack<T>> stack(
+		RandomGenerator<T> elementGenerator,
+		int minSize, int maxSize, long maxUniqueElements,
+		int genSize, RandomDistribution sizeDistribution,
+		Set<FeatureExtractor<T>> uniquenessExtractors,
+		Arbitrary<T> elementArbitrary
+	) {
+
+		Function<List<Shrinkable<T>>, Shrinkable<Stack<T>>> createShrinkable =
+			elements -> new ShrinkableStack<>(elements, minSize, maxSize, uniquenessExtractors, elementArbitrary);
+
+		return container(elementGenerator, createShrinkable, minSize,
+						 maxSize, maxUniqueElements, genSize,
+						 sizeDistribution, uniquenessExtractors);
 	}
 
 	public static <T> RandomGenerator<Set<T>> set(
