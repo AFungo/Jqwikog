@@ -19,7 +19,7 @@ public class DefaultRandoopArbitrary<T> implements RandoopArbitrary<T>{
 	public DefaultRandoopArbitrary(Class<T> clazz){this.clazz = clazz;}
 
 	@Override
-	public RandomGenerator<T> generator(int genSize) { return RandomGenerators.randoop(clazz);}
+	public RandomGenerator<T> generator(int genSize) { return RandomGenerators.randoop(clazz, genSize);}
 
 	@Override
 	public Optional<ExhaustiveGenerator<T>> exhaustive(long maxNumberOfSamples) {

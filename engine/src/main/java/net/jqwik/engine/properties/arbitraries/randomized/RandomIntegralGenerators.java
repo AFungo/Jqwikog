@@ -43,19 +43,27 @@ public class RandomIntegralGenerators {
 		};
 	}
 
-	public static <T> RandomGenerator<T> randoop(Class<T> clazz){
-		int seed = 0;//(int)(random()*1000);
+	public static <T> RandomGenerator<T> randoop(Class<T> clazz, int genSize, RandomDistribution distribution){
+		RandomNumericGenerator numericGenerator =
+			distribution.createGenerator(genSize, BigInteger.valueOf(1), BigInteger.valueOf(1000), BigInteger.valueOf(500));//TODO: here center doesnt cares, because we use normaldistribution
 		RandoopObjectGenerator rog = new RandoopObjectGenerator(clazz);
-		rog.setSeed(seed);
+		// rog.setSeed(seed);
 		rog.addFlag(new LiteralsFileFlag("/home/augusto/Documents/tesis/randoopObjectGenerator/literals/lits.txt"));
-		List<Object> obj = rog.generateObjects(20);
+		List<Object> obj = new LinkedList<>();// = rog.generateObjects(genSize);
 		// for (Object o: obj) {
 		// 	System.out.println(o);
 		// }
 		return random -> {
 			if(obj.isEmpty()){
-				rog.setSeed(seed+1);
-				obj.addAll(rog.generateObjects(20));
+				int seed = numericGenerator.next(random).intValue();//(int)(random()*1000);
+				rog.setSeed(seed);
+				/*
+				* TODO: aca tengo un problema, ya que genero el tamaño de la muestra pero no siempre es necesario,
+				 * ya que a veces si es randoop esta generando objetos para una parametizacion
+				 * por ejemplo List<Date> (randoop genera para Date) no es necesario el tamaño total de la muestra,
+				 * necesitaria el tamaño total si generara para List, pero no se cuantas muestras son las necesarias...
+				 * */
+				obj.addAll(rog.generateObjects(genSize));
 				// obj = rog.generateObjects(20);
 			}
 			return Shrinkable.unshrinkable((T) obj.remove(0));
