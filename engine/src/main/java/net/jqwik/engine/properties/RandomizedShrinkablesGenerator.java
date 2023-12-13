@@ -150,7 +150,7 @@ public class RandomizedShrinkablesGenerator implements ForAllParametersGenerator
 							 .map(Arbitrary::asGeneric)
 							 .collect(CollectorsSupport.toLinkedHashSet());
 		if (arbitraries.isEmpty()) {
-			//TODO: aca podriamos poner randoop, es una opcion pero no me gusta pq ya esta reuslto los parametrizados para este punto ...
+			//NOTE: aca podriamos poner randoop, es una opcion pero no me gusta pq ya esta reuslto los parametrizados para este punto ...
 			// Class<?> clazz = parameter.getRawParameter().getType();
 			// arbitraries.add(new DefaultRandoopArbitrary<Object>((Class<Object>) clazz));
 			// System.out.println("We going to use randoop :)");

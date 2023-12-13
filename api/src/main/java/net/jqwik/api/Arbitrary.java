@@ -36,7 +36,7 @@ public interface Arbitrary<@Nullable T> {
 
 		public abstract <T> StackArbitrary stack(Arbitrary<T> elementArbitrary);
 
-		//TODO: i dont know what its the right name
+		//NOTE: i dont know what its the right name
 		public abstract <T> RandoopArbitrary randoop(Arbitrary<T> elementArbitrary);
 
 		public abstract <T> SetArbitrary<T> set(Arbitrary<T> elementArbitrary);
