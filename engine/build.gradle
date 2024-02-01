@@ -74,11 +74,12 @@ test {
 		includeEngines 'junit-jupiter'
 	}
 
-	include 'net/**/*Properties.class'
-	include 'net/**/*Example.class'
-	include 'net/**/*Examples.class'
-	include 'net/**/*Test.class'
-	include 'net/**/*Tests.class'
+//	include 'net/**/*Properties.class'
+//	include 'net/**/*Example.class'
+//	include 'net/**/*Examples.class'
+//	include 'net/**/*Test.class'
+//	include 'net/**/*Tests.class'
+//	include 'examples/randoopTest/*'
 
 	reports {
 		junitXml.required = true

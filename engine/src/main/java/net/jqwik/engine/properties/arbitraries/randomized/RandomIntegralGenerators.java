@@ -48,7 +48,7 @@ public class RandomIntegralGenerators {
 			distribution.createGenerator(genSize, BigInteger.valueOf(1), BigInteger.valueOf(1000), BigInteger.valueOf(500));//TODO: here center doesnt cares, because we use normaldistribution
 		RandoopObjectGenerator rog = new RandoopObjectGenerator(clazz);
 		// rog.setSeed(seed);
-		rog.addFlag(new LiteralsFileFlag("/home/augusto/Documents/tesis/randoopObjectGenerator/literals/lits.txt"));
+		// rog.addFlag(new LiteralsFileFlag("/home/augusto/Documents/tesis/randoopObjectGenerator/literals/lits.txt"));
 		List<Object> obj = new LinkedList<>();// = rog.generateObjects(genSize);
 		// for (Object o: obj) {
 		// 	System.out.println(o);
