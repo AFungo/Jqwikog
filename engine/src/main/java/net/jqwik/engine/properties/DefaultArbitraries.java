@@ -16,7 +16,6 @@ public class DefaultArbitraries {
 		ArrayList<ArbitraryProvider> providers = new ArrayList<>();
 		providers.add(new EnumArbitraryProvider());
 		providers.add(new ListArbitraryProvider());
-		providers.add(new StackArbitraryProvider());//add my class to default providers
 		providers.add(new RandoopArbitraryProvider());//NOTE: add here my randoop, here we add to the list of objects generators
 		providers.add(new SetArbitraryProvider());
 		providers.add(new HashMapArbitraryProvider());

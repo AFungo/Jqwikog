@@ -144,22 +144,6 @@ public class RandomGenerators {
 		return container(elementGenerator, createShrinkable, minSize, maxSize, maxUniqueElements, genSize, sizeDistribution, uniquenessExtractors);
 	}
 
-	public static <T> RandomGenerator<Stack<T>> stack(
-		RandomGenerator<T> elementGenerator,
-		int minSize, int maxSize, long maxUniqueElements,
-		int genSize, RandomDistribution sizeDistribution,
-		Set<FeatureExtractor<T>> uniquenessExtractors,
-		Arbitrary<T> elementArbitrary
-	) {
-
-		Function<List<Shrinkable<T>>, Shrinkable<Stack<T>>> createShrinkable =
-			elements -> new ShrinkableStack<>(elements, minSize, maxSize, uniquenessExtractors, elementArbitrary);
-
-		return container(elementGenerator, createShrinkable, minSize,
-						 maxSize, maxUniqueElements, genSize,
-						 sizeDistribution, uniquenessExtractors);
-	}
-
 	public static <T> RandomGenerator<Set<T>> set(
 		RandomGenerator<T> elementGenerator,
 		int minSize, int maxSize, int genSize,

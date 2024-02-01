@@ -34,9 +34,6 @@ public interface Arbitrary<@Nullable T> {
 
 		public abstract <T> ListArbitrary<T> list(Arbitrary<T> elementArbitrary);
 
-		public abstract <T> StackArbitrary stack(Arbitrary<T> elementArbitrary);
-
-		//NOTE: i dont know what its the right name
 		public abstract <T> RandoopArbitrary randoop(Arbitrary<T> elementArbitrary);
 
 		public abstract <T> SetArbitrary<T> set(Arbitrary<T> elementArbitrary);
@@ -291,11 +288,6 @@ public interface Arbitrary<@Nullable T> {
 	default RandoopArbitrary randoop(){
 		return ArbitraryFacade.implementation.randoop(this);
 	}
-
-	default StackArbitrary stack(){
-		return ArbitraryFacade.implementation.stack(this);
-	}
-
 
 	/**
 	 * Create a new arbitrary of type {@code Set<T>} using the existing arbitrary for generating the elements of the set.
