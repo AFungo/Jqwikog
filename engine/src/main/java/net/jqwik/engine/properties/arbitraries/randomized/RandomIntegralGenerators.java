@@ -57,13 +57,17 @@ public class RandomIntegralGenerators {
 			if(obj.isEmpty()){
 				int seed = numericGenerator.next(random).intValue();//(int)(random()*1000);
 				rog.setSeed(seed);
-				/*
-				* TODO: aca tengo un problema, ya que genero el tamaño de la muestra pero no siempre es necesario,
-				 * ya que a veces si es randoop esta generando objetos para una parametizacion
-				 * por ejemplo List<Date> (randoop genera para Date) no es necesario el tamaño total de la muestra,
-				 * necesitaria el tamaño total si generara para List, pero no se cuantas muestras son las necesarias...
-				 * */
-				obj.addAll(rog.generateObjects(genSize));
+				/**
+				 * Note: Ahora lo entiendo de otra manera, si comparo con el generador de biginteger (que es el generador de objetos por defecto
+				 * de jqkiq es decir todos los objetos no parameterizados que puede generar jqkiw nacen de big intger) la demanda de cuantos
+				 * objetos necesito esta en otro lado, aca deberia elegir un numero a conveniencia para decirle a randoop che generame estos
+				 * y en caso de necesitar mas me van a seguir pidendo hasta suplir la demanda
+				 * deberia ser un numero estrategicamente elegido para que no sea lento el proceso de generacion, ni muy chico ni demasiado
+				 * grande para no generar elemntos porque si
+				 * posible problema es que si el numero es my chico como que randoop no "apende", e decir volveria a generar casos muy bases
+				 * con una nueva semilla / tambien deberia analizar si debo cambir la semilla o no, porque podria seguir generando desde el ultimo punto que deje de generar
+				 */
+				obj.addAll(rog.generateObjects(100));//A lo mejor una buena estrategia es generar en base a la couta como hacer una formula o algo asi... tal vez identificar de alguna manera es una parametrizacion o no
 				// obj = rog.generateObjects(20);
 			}
 			return Shrinkable.unshrinkable((T) obj.remove(0));

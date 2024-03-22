@@ -14,53 +14,58 @@ import static java.lang.Math.*;
 
 public class RandoopTest {
 
-
 	@Property(tries = 10)
-	void charTest(@ForAll Stack c) {
-		System.out.println(c);
-	}
-
-	@Property(tries = 10)
-	void myOwnTest(@ForAll @MyOwnConstraint(from = 0, to = 10) Stack<String> stackOfStrings) {
-		System.out.println(String.format("%s", stackOfStrings));
-	}
-
-
-	@Property(tries = 100)
-	void stackTest(@ForAll Stack<Date> stack) {
+	void stackSizeTest(@ForAll Stack stack) {
 		Assume.that(!stack.isEmpty());
-		System.out.println(stack);
-		int previusSize = stack.size();
+		System.out.println("Size = " + stack.size() + " " + stack);
+		int previousSize = stack.size();
 		stack.peek();
-		Assertions.assertEquals(stack.size(), previusSize);
+		Assertions.assertEquals(stack.size(), previousSize);
 	}
 
 	@Property(tries = 100)
-	void dateTest(@ForAll Date date) {
-		// Assume.that(!stack.isEmpty());
+	void dateAfterTest(@ForAll Date date) {
 		System.out.println(date);
 		Assertions.assertFalse(date.after(date));
 	}
 
 	@Property(tries = 100)
-	void bitSetTest(@ForAll BitSet set) {
+	void bitSetClearTest(@ForAll BitSet set) {
 		Assume.that(!set.isEmpty());
 		System.out.println(set);
 		set.clear();
 		Assertions.assertTrue(set.isEmpty());
 	}
-	@Provide("stackProvider")
-	Arbitrary<Stack<Object>> stackProvider(){
-		int seed = (int)(random()*1000);
-		RandoopObjectGenerator rog = new RandoopObjectGenerator(Stack.class);
-		rog.setSeed(seed);
-		rog.addFlag(new LiteralsFileFlag("/home/augusto/Documents/tesis/randoopObjectGenerator/literals/lits.txt"));
-		List<Object> obj = rog.generateObjects(3);
-		for (Object o: obj) {
-			System.out.println(o);
-		}
-		System.out.println("----------------------------------\n");
-		return Arbitraries.of(obj.stream().map(a -> (Stack<Object>) a).collect(Collectors.toList()));
-		// return Arbitraries.of();
+
+	@Property(tries = 100)
+	void priorityQueueTest(@ForAll PriorityQueue<Date> pq) {
+		System.out.println(pq);
+		pq.clear();
+		Assertions.assertTrue(pq.isEmpty());
 	}
+
+	@Property(tries = 100)
+	void treeSetTest(@ForAll TreeSet<Date> ts) {
+		System.out.println(ts);
+		ts.clear();
+		Assertions.assertTrue(ts.isEmpty());
+	}
+
+
+	@Property(tries = 100)
+	void localeTest(@ForAll Locale locale) {
+		System.out.println(locale);
+		Assertions.assertFalse(locale.getLanguage().isEmpty());
+	}
+
+	//tes list de date
+	/**
+	 * ----- Que pasa con la instanciacion la cantidad (ya tengo forma de resolverlo, creo. Esta explicado en RandomIntegralGenerators)
+	 *como puede randoop aprender de la info previa //No se si aprende, tiene una lista de metodos que puede ir usando con los objetos
+	 * ----- ver como instancias clases en randoop y que me genere objetos de ese tipo
+	 * arreglar las path en los repos
+	 * ------ sacar stack del repo
+	 * ------ sacar myownconstraint
+	 *
+	 */
 }
