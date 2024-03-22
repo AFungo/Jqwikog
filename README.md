@@ -11,4 +11,10 @@ that focuses on Property-Based Testing.
 
 ## See the [jqwik website](http://jqwik.net) for further details and documentation.
 
+#Quick Start
+JAVA version = openjdk 11.0.22 2024-01-16
+             = openjdk version "1.8.0_392"
 
+Build = ./gradlew build -x engine:test -x kotlin:test
+Run randoop class test = ./gradlew :engine:test --tests examples.randoopTest.RandoopTest
+Run a single randoop test = ./gradlew :engine:test --tests examples.randoopTest.RandoopTest.testName
