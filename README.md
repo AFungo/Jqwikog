@@ -11,7 +11,7 @@ that focuses on Property-Based Testing.
 
 ## See the [jqwik website](http://jqwik.net) for further details and documentation.
 
-#Quick Start
+## Quick Start
 JAVA version = openjdk 11.0.22 2024-01-16
              = openjdk version "1.8.0_392"
 
