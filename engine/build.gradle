@@ -84,8 +84,13 @@ test {
 	reports {
 		junitXml.required = true
 	}
+	
+	testLogging {
+        showStandardStreams = true
+        events "passed", "skipped", "failed"
+    }
 
-	testLogging.showStandardStreams = showStandardStreams
+//	testLogging.showStandardStreams = showStandardStreams
 }
 
 dependencies {
