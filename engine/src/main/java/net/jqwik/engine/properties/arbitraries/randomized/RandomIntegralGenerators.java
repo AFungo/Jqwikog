@@ -43,10 +43,12 @@ public class RandomIntegralGenerators {
 		};
 	}
 
-	public static <T> RandomGenerator<T> randoop(Class<T> clazz, int genSize, RandomDistribution distribution){
+	public static <T> RandomGenerator<T> randoop(Class<T> clazz, List<Class<?>> parameterizedClasses, int genSize, RandomDistribution distribution){
 		RandomNumericGenerator numericGenerator =
 			distribution.createGenerator(genSize, BigInteger.valueOf(1), BigInteger.valueOf(1000), BigInteger.valueOf(500));//TODO: here center doesnt cares, because we use normaldistribution
-		RandoopObjectGenerator rog = new RandoopObjectGenerator(clazz);
+
+		RandoopObjectGenerator rog = parameterizedClasses.isEmpty()?
+										 new RandoopObjectGenerator(clazz): new RandoopObjectGenerator(clazz, parameterizedClasses);
 		// rog.setSeed(seed);
 		// rog.addFlag(new LiteralsFileFlag("/home/augusto/Documents/tesis/randoopObjectGenerator/literals/lits.txt"));
 		List<Object> obj = new LinkedList<>();// = rog.generateObjects(genSize);

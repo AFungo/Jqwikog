@@ -56,8 +56,8 @@ public class RandomGenerators {
 		return integers(min, max).map(anInt -> ((char) (int) anInt));
 	}
 
-	public static <T> RandomGenerator<T> randoop(Class<T> clazz, int genSize) {
-		return RandomIntegralGenerators.randoop(clazz, genSize, RandomDistribution.uniform());
+	public static <T> RandomGenerator<T> randoop(Class<T> clazz, int genSize, List<Class<?>> parameterizedClasses) {
+		return RandomIntegralGenerators.randoop(clazz, parameterizedClasses, genSize, RandomDistribution.uniform());
 	}
 
 	public static RandomGenerator<Integer> integers(int min, int max) {

@@ -15,11 +15,23 @@ import java.util.function.*;
 import java.util.stream.*;
 
 public class DefaultRandoopArbitrary<T> implements RandoopArbitrary<T>{
+
 	Class<T> clazz;
-	public DefaultRandoopArbitrary(Class<T> clazz){this.clazz = clazz;}
+	List<Class<?>> parameterizedClasses;
+
+	public DefaultRandoopArbitrary(Class<T> clazz){
+		this.clazz = clazz;
+		this.parameterizedClasses = new ArrayList<>();
+	}
+	public DefaultRandoopArbitrary(Class<T> clazz, List<Class<?>> parameterizedClasses){
+		this.clazz = clazz;
+		this.parameterizedClasses = parameterizedClasses;
+	}
 
 	@Override
-	public RandomGenerator<T> generator(int genSize) { return RandomGenerators.randoop(clazz, genSize);}
+	public RandomGenerator<T> generator(int genSize) {
+			return RandomGenerators.randoop(clazz, genSize, parameterizedClasses);//NOTE: No estoy seguro que sea buena idea poner la lista aca ya que a veces es vacia
+	}
 
 	@Override
 	public Optional<ExhaustiveGenerator<T>> exhaustive(long maxNumberOfSamples) {
