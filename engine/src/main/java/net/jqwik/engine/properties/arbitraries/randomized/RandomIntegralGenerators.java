@@ -49,31 +49,10 @@ public class RandomIntegralGenerators {
 
 		RandoopObjectGenerator rog = parameterizedClasses.isEmpty()?
 										 new RandoopObjectGenerator(clazz): new RandoopObjectGenerator(clazz, parameterizedClasses);
-		// rog.setSeed(seed);
-		// rog.addFlag(new LiteralsFileFlag("/home/augusto/Documents/tesis/randoopObjectGenerator/literals/lits.txt"));
-		List<Object> obj = new LinkedList<>();// = rog.generateObjects(genSize);
-		// for (Object o: obj) {
-		// 	System.out.println(o);
-		// }
-		return random -> {
-			if(obj.isEmpty()){
-				int seed = numericGenerator.next(random).intValue();//(int)(random()*1000);
-				rog.setSeed(seed);
-				/**
-				 * Note: Ahora lo entiendo de otra manera, si comparo con el generador de biginteger (que es el generador de objetos por defecto
-				 * de jqkiq es decir todos los objetos no parameterizados que puede generar jqkiw nacen de big intger) la demanda de cuantos
-				 * objetos necesito esta en otro lado, aca deberia elegir un numero a conveniencia para decirle a randoop che generame estos
-				 * y en caso de necesitar mas me van a seguir pidendo hasta suplir la demanda
-				 * deberia ser un numero estrategicamente elegido para que no sea lento el proceso de generacion, ni muy chico ni demasiado
-				 * grande para no generar elemntos porque si
-				 * posible problema es que si el numero es my chico como que randoop no "apende", e decir volveria a generar casos muy bases
-				 * con una nueva semilla / tambien deberia analizar si debo cambir la semilla o no, porque podria seguir generando desde el ultimo punto que deje de generar
-				 */
-				obj.addAll(rog.generateObjects(100));//A lo mejor una buena estrategia es generar en base a la couta como hacer una formula o algo asi... tal vez identificar de alguna manera es una parametrizacion o no
-				// obj = rog.generateObjects(20);
-			}
-			return Shrinkable.unshrinkable((T) obj.remove(0));
-		};
+		//TODO: Ver el tema del random para generar (recordar que jqkwik va cambiando el random)
+		//ademas sospecho que al ponerlo asi siempre me va a dar los mismos resultados
+		rog.setSeed(100);//numericGenerator.next(100).intValue());
+		return random -> Shrinkable.unshrinkable(((T) rog.generateOneObject()));
 	}
 	private static void checkTargetInRange(Range<BigInteger> range, BigInteger value) {
 		if (!range.includes(value)) {
