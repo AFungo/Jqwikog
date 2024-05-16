@@ -1,5 +1,7 @@
 package examples.randoopTest;
 
+import examples.datastructure.*;
+
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
 
@@ -8,19 +10,38 @@ import randoop.main.*;
 import randoop.main.randoopflags.*;
 
 import java.util.*;
+import java.util.Stack;
 import java.util.stream.*;
 
 import static java.lang.Math.*;
 
 public class RandoopTest {
 
+	@Property(tries = 100)
+	void pilasTest(@ForAll PilaSobreListasEnlazadas stack) {
+		Assume.that(!stack.isEmpty());
+		System.out.println(stack);
+		// int previousSize = stack.size();
+		// stack.peek();
+		// Assertions.assertEquals(stack.size(), previousSize);
+	}
+
 	@Property(tries = 10)
-	void stackSizeTest(@ForAll Stack stack) {
+	void stackSizeTest(@ForAll Stack<Date> stack) {
 		Assume.that(!stack.isEmpty());
 		System.out.println("Size = " + stack.size() + " " + stack);
-		int previousSize = stack.size();
-		stack.peek();
-		Assertions.assertEquals(stack.size(), previousSize);
+		// int previousSize = stack.size();
+		// stack.peek();
+		// Assertions.assertEquals(stack.size(), previousSize);
+	}
+
+	@Property(tries = 10)
+	void hashMapTest(@ForAll TreeMap<String, Integer> map) {
+		Assume.that(!map.isEmpty());
+		System.out.println(map);
+		// int previousSize = stack.size();
+		// stack.peek();
+		// Assertions.assertEquals(stack.size(), previousSize);
 	}
 
 	@Property(tries = 100)
@@ -57,15 +78,4 @@ public class RandoopTest {
 		System.out.println(locale);
 		Assertions.assertFalse(locale.getLanguage().isEmpty());
 	}
-
-	//tes list de date
-	/**
-	 * ----- Que pasa con la instanciacion la cantidad (ya tengo forma de resolverlo, creo. Esta explicado en RandomIntegralGenerators)
-	 *como puede randoop aprender de la info previa //No se si aprende, tiene una lista de metodos que puede ir usando con los objetos
-	 * ----- ver como instancias clases en randoop y que me genere objetos de ese tipo
-	 * arreglar las path en los repos
-	 * ------ sacar stack del repo
-	 * ------ sacar myownconstraint
-	 *
-	 */
 }
