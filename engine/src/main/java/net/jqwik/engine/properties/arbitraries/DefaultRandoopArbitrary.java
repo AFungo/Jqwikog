@@ -30,7 +30,7 @@ public class DefaultRandoopArbitrary<T> implements RandoopArbitrary<T>{
 
 	@Override
 	public RandomGenerator<T> generator(int genSize) {
-			return RandomGenerators.randoop(clazz, genSize, parameterizedClasses);//NOTE: No estoy seguro que sea buena idea poner la lista aca ya que a veces es vacia
+		return RandomGenerators.randoop(clazz, parameterizedClasses);
 	}
 
 	@Override
@@ -40,20 +40,6 @@ public class DefaultRandoopArbitrary<T> implements RandoopArbitrary<T>{
 		// return ExhaustiveGenerators.stack(elementArbitrary, minSize, maxSize(), uniquenessExtractors, maxNumberOfSamples);
 	}
 
-	private Arbitrary<T> arbitrary() {
-		// if (partsWithSize.isEmpty()) {
-		return defaultArbitrary();
-		// }
-		// if (partsWithSize.size() == 1) {
-		// 	return partsWithSize.get(0).get2();
-		// }
-	}
-
-	private Arbitrary<T> defaultArbitrary() {
-		return new DefaultRandoopArbitrary<T>(this.clazz);
-	}
-
-	//TODO: no se que hace esto
 	@Override
 	public EdgeCases<T> edgeCases(int maxEdgeCases) {
 		return EdgeCasesSupport.fromShrinkables(listOfEdgeCases());
@@ -62,7 +48,6 @@ public class DefaultRandoopArbitrary<T> implements RandoopArbitrary<T>{
 	private List<Shrinkable<T>> listOfEdgeCases() {
 		return new LinkedList<Shrinkable<T>>();
 	}
-
 
 	@Override
 	public RandoopArbitrary<T> all() {
