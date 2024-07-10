@@ -5,7 +5,6 @@ import java.util.*;
 import net.jqwik.api.*;
 import net.jqwik.api.providers.*;
 import net.jqwik.api.providers.ArbitraryProvider.*;
-import net.jqwik.engine.properties.arbitraries.*;
 
 public class RegisteredArbitraryResolver {
 
@@ -20,7 +19,6 @@ public class RegisteredArbitraryResolver {
 		int currentPriority = Integer.MIN_VALUE;
 		Set<Arbitrary<?>> fittingArbitraries = new LinkedHashSet<>();
 		for (ArbitraryProvider provider : registeredProviders) {
-			//NOTE: here is the magic, randoop can provide for everyone but his priority is too lower, if exist another generator we wouldn't choose randoop
 			if (provider.canProvideFor(targetType)) {
 				if (provider.priority() < currentPriority) {
 					continue;
@@ -33,12 +31,6 @@ public class RegisteredArbitraryResolver {
 				fittingArbitraries.addAll(arbitraries);
 			}
 		}
-		// if (fittingArbitraries.isEmpty()) {
-		// 	//NOTE: aca se usa randoop cuando no encuentra ningun otro generador es la ultima opcion, por ahora ;)
-		// 	Class<?> clazz = targetType.getRawType();//parameter.getRawParameter().getType();
-		// 	fittingArbitraries.add(new DefaultRandoopArbitrary<>((Class<?>) clazz));
-		// 	System.out.println("We going to use randoop :)");
-		// }
 		return fittingArbitraries;
 	}
 
