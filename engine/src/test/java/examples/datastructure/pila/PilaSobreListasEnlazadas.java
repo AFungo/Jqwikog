@@ -1,4 +1,4 @@
-package examples.datastructure;
+package examples.datastructure.pila;
 
 import java.util.ArrayList;
 import java.util.List;

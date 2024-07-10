@@ -1,4 +1,4 @@
-package examples.datastructure;
+package examples.datastructure.pila;
 
 public class Entry {
 	private Integer item;

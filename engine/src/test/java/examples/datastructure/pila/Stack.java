@@ -1,4 +1,4 @@
-package examples.datastructure;
+package examples.datastructure.pila;
 /**
  * Interface que especifica las operaciones básicas del
  * TAD Pila. Esta interface corresponde a implementaciones de pilas.de enteros

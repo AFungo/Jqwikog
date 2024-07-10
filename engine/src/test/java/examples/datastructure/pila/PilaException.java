@@ -1,4 +1,4 @@
-package examples.datastructure;
+package examples.datastructure.pila;
 /* ----------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------- */
 /* PilaException: PilaExcepcion utilizada para indicar terminacion anormal de  */
