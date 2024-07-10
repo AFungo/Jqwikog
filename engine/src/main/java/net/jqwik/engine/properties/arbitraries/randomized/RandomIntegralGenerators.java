@@ -5,13 +5,10 @@ import java.util.*;
 
 import net.jqwik.api.*;
 import net.jqwik.api.RandomDistribution.*;
+import net.jqwik.engine.*;
 import net.jqwik.engine.properties.*;
 import net.jqwik.engine.properties.shrinking.*;
-
 import randoop.main.*;
-import randoop.main.randoopflags.*;
-
-import static java.lang.Math.*;
 
 public class RandomIntegralGenerators {
 
@@ -43,15 +40,21 @@ public class RandomIntegralGenerators {
 		};
 	}
 
-	public static <T> RandomGenerator<T> randoop(Class<T> clazz, List<Class<?>> parameterizedClasses, int genSize, RandomDistribution distribution){
-		RandomNumericGenerator numericGenerator =
-			distribution.createGenerator(genSize, BigInteger.valueOf(1), BigInteger.valueOf(1000), BigInteger.valueOf(500));//TODO: here center doesnt cares, because we use normaldistribution
-
+	public static <T> RandomGenerator<T> randoop(Class<T> clazz,
+												 List<Class<?>> parameterizedClasses,
+												 Integer minIntegerRange, Integer maxIntegerRange){
+		Random r = SourceOfRandomness.current();
+		int seed = r.nextInt();
 		RandoopObjectGenerator rog = parameterizedClasses.isEmpty()?
-										 new RandoopObjectGenerator(clazz): new RandoopObjectGenerator(clazz, parameterizedClasses);
-		//TODO: Ver el tema del random para generar (recordar que jqkwik va cambiando el random)
-		//ademas sospecho que al ponerlo asi siempre me va a dar los mismos resultados
-		rog.setSeed(100);//numericGenerator.next(100).intValue());
+										 new RandoopObjectGenerator(clazz, seed): new RandoopObjectGenerator(clazz, parameterizedClasses, seed);
+
+		if(minIntegerRange != null && maxIntegerRange != null){
+			rog.setIntegerRange(minIntegerRange, maxIntegerRange);
+		} else if (minIntegerRange != null) {
+			rog.setIntegerRange(minIntegerRange, maxIntegerRange+10);
+		}else if (maxIntegerRange != null) {
+			rog.setIntegerRange(maxIntegerRange-10, maxIntegerRange);
+		}
 		return random -> Shrinkable.unshrinkable(((T) rog.generateOneObject()));
 	}
 	private static void checkTargetInRange(Range<BigInteger> range, BigInteger value) {

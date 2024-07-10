@@ -8,7 +8,6 @@ import java.util.function.*;
 import net.jqwik.api.*;
 import net.jqwik.api.Tuple.*;
 import net.jqwik.engine.properties.*;
-import net.jqwik.engine.properties.arbitraries.*;
 import net.jqwik.engine.properties.shrinking.*;
 
 import static java.lang.Math.*;
@@ -56,8 +55,11 @@ public class RandomGenerators {
 		return integers(min, max).map(anInt -> ((char) (int) anInt));
 	}
 
-	public static <T> RandomGenerator<T> randoop(Class<T> clazz, List<Class<?>> parameterizedClasses) {
-		return RandomIntegralGenerators.randoop(clazz, parameterizedClasses);
+	public static <T> RandomGenerator<T> randoop(Class<T> clazz,
+												 List<Class<?>> parameterizedClasses,
+												 Integer minIntegerRange,Integer maxIntegerRange) {
+		return RandomIntegralGenerators.randoop(clazz, parameterizedClasses,
+												minIntegerRange, maxIntegerRange);
 	}
 
 	public static RandomGenerator<Integer> integers(int min, int max) {
