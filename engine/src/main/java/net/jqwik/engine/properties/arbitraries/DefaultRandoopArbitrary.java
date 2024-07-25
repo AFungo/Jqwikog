@@ -18,8 +18,8 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	Class<T> clazz;
 	List<Class<?>> parameterizedClasses;
-	Integer minIntegerRange;
-	Integer maxIntegerRange;
+
+	Set<Integer> intLiterals = new HashSet<>();
 
 	public DefaultRandoopArbitrary(Class<T> clazz){
 		this.clazz = clazz;
@@ -32,7 +32,7 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	@Override
 	public RandomGenerator<T> generator(int genSize) {
-		return RandomGenerators.randoop(clazz, parameterizedClasses, minIntegerRange, maxIntegerRange);
+		return RandomGenerators.randoop(clazz, parameterizedClasses, intLiterals);
 	}
 
 	@Override
@@ -46,25 +46,19 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 	}
 
 	private List<Shrinkable<T>> listOfEdgeCases() {
-		return new LinkedList<Shrinkable<T>>();
+		return new LinkedList<>();
 	}
 
 	@Override
 	public RandoopArbitrary<T> all() {
-		return new DefaultRandoopArbitrary<T>(this.clazz);
+		return new DefaultRandoopArbitrary<>(this.clazz);
 	}
 
 	@Override
-	public RandoopArbitrary<T> greaterOrEqual(int min) {
+	public RandoopArbitrary<T> setIntegersLiterals(int min, int max) {
 		DefaultRandoopArbitrary<T> clone = typedClone();
-		clone.minIntegerRange = min;
-		return clone;
-	}
-
-	@Override
-	public RandoopArbitrary<T> lessOrEqual(int max) {
-		DefaultRandoopArbitrary<T> clone = typedClone();
-		clone.maxIntegerRange = max;
+		clone.intLiterals = Arbitraries.integers().between(min, max).
+									   set().sample();
 		return clone;
 	}
 }

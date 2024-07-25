@@ -11,7 +11,8 @@ public class RandoopIntegerRangeConfigurator extends ArbitraryConfiguratorBase {
 	public Arbitrary<?> configure(Arbitrary<?> arbitrary, IntRange range) {
 		if (arbitrary instanceof RandoopArbitrary) {
 			RandoopArbitrary<?> randoopArbitrary = (RandoopArbitrary<?>) arbitrary;
-			return randoopArbitrary.greaterOrEqual(range.min()).lessOrEqual(range.max()!=Integer.MAX_VALUE ? range.max() : 10);
+			return randoopArbitrary.setIntegersLiterals(range.min(), range.max());
+					   //greaterOrEqual(range.min()).lessOrEqual(range.max()!=Integer.MAX_VALUE ? range.max() : 10);
 		}
 		return arbitrary;
 	}

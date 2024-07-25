@@ -42,20 +42,17 @@ public class RandomIntegralGenerators {
 
 	public static <T> RandomGenerator<T> randoop(Class<T> clazz,
 												 List<Class<?>> parameterizedClasses,
-												 Integer minIntegerRange, Integer maxIntegerRange){
+												 Set<Integer> integersLiterals){
 		Random r = SourceOfRandomness.current();
 		int seed = r.nextInt();
 		RandoopObjectGenerator rog = parameterizedClasses.isEmpty()?
 										 new RandoopObjectGenerator(clazz, seed): new RandoopObjectGenerator(clazz, parameterizedClasses, seed);
 
-		if(minIntegerRange != null && maxIntegerRange != null){
-			rog.setIntegerRange(minIntegerRange, maxIntegerRange);
-		} else if (minIntegerRange != null) {
-			rog.setIntegerRange(minIntegerRange, maxIntegerRange+10);
-		}else if (maxIntegerRange != null) {
-			rog.setIntegerRange(maxIntegerRange-10, maxIntegerRange);
+		if(!integersLiterals.isEmpty()){
+			rog.setCustomIntegers(integersLiterals);
 		}
-		return random -> Shrinkable.unshrinkable(((T) rog.generateOneObject()));
+
+		return random -> Shrinkable.unshrinkable(((T) rog.generate()));
 	}
 	private static void checkTargetInRange(Range<BigInteger> range, BigInteger value) {
 		if (!range.includes(value)) {
