@@ -2,12 +2,8 @@ package net.jqwik.api.arbitraries;
 
 import net.jqwik.api.*;
 
-import org.apiguardian.api.*;
 
 import java.util.*;
-import java.util.function.*;
-
-import static org.apiguardian.api.API.Status.*;
 
 public interface RandoopArbitrary<T> extends Arbitrary<T>{
 	/**
@@ -22,4 +18,6 @@ public interface RandoopArbitrary<T> extends Arbitrary<T>{
 	RandoopArbitrary<T> all();
 
 	RandoopArbitrary<T> setIntegersLiterals(int min, int max);
+
+	RandoopArbitrary<T> setNecessaryClasses(Set<Class<?>> classes);
 }

@@ -57,9 +57,10 @@ public class RandomGenerators {
 
 	public static <T> RandomGenerator<T> randoop(Class<T> clazz,
 												 List<Class<?>> parameterizedClasses,
-												 Set<Integer> integersLiterals) {
+												 Set<Integer> integersLiterals,
+												 Set<Class<?>> necessaryClasses) {
 		return RandomIntegralGenerators.randoop(clazz, parameterizedClasses,
-												integersLiterals);
+												integersLiterals, necessaryClasses);
 	}
 
 	public static RandomGenerator<Integer> integers(int min, int max) {

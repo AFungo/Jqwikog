@@ -21,6 +21,8 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	Set<Integer> intLiterals = new HashSet<>();
 
+	Set<Class<?>> necessaryClasses = new HashSet<>();
+
 	public DefaultRandoopArbitrary(Class<T> clazz){
 		this.clazz = clazz;
 		this.parameterizedClasses = new ArrayList<>();
@@ -32,7 +34,7 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	@Override
 	public RandomGenerator<T> generator(int genSize) {
-		return RandomGenerators.randoop(clazz, parameterizedClasses, intLiterals);
+		return RandomGenerators.randoop(clazz, parameterizedClasses, intLiterals, necessaryClasses);
 	}
 
 	@Override
@@ -59,6 +61,13 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 		DefaultRandoopArbitrary<T> clone = typedClone();
 		clone.intLiterals = Arbitraries.integers().between(min, max).
 									   set().sample();
+		return clone;
+	}
+
+	@Override
+	public RandoopArbitrary<T> setNecessaryClasses(Set<Class<?>> classes) {
+		DefaultRandoopArbitrary<T> clone = typedClone();
+		clone.necessaryClasses.addAll(classes);
 		return clone;
 	}
 }
