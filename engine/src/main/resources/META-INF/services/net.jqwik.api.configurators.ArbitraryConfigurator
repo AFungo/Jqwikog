@@ -13,4 +13,4 @@ net.jqwik.engine.properties.configurators.PositiveConfigurator
 net.jqwik.engine.properties.configurators.NegativeConfigurator
 net.jqwik.engine.properties.configurators.WhitespaceConfigurator
 net.jqwik.engine.properties.configurators.NotBlankConfigurator
-net.jqwik.engine.properties.configurators.RandoopIntegerRangeConfigurator
+net.jqwik.engine.properties.configurators.RandoopConfigurators
