@@ -10,11 +10,8 @@ import net.jqwik.api.constraints.*;
 import static org.apiguardian.api.API.Status.*;
 
 /**
- * Constrain the range of a generated int or Integer parameters.
+ * Take all necessary classes for object generation
  *
- * Applies to int or Integer parameters which are also annotated with {@code @ForAll}.
- *
- * @see net.jqwik.api.ForAll
  */
 @Target({ ElementType.ANNOTATION_TYPE, ElementType.PARAMETER, ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
