@@ -3,23 +3,38 @@ package experiments;
 import examples.datastructure.list.*;
 import examples.datastructure.ncl.*;
 
-import examples.datastructure.pila.PilaSobreListasEnlazadas;
+import examples.datastructure.pila.*;
 import examples.datastructure.set.*;
+
+import examples.datastructure.set.BitSet;
 
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
 
 // import org.junit.jupiter.api.*;
+import net.jqwik.api.randoop.*;
+
 import org.assertj.core.api.Assertions;
+
+import java.util.*;
+
 public class RandoopExperiments {
+
 	@Property(tries = 100)
 	void pilasTest(
 		@ForAll @IntRange(min = 110,max = 120) PilaSobreListasEnlazadas stack) {
-		// System.out.println(stack);
+		System.out.println(stack);
 		Assume.that(stack.length() > 4);
 		int previousSize = stack.length();
 		stack.pop();
 		Assertions.assertThat(stack.length()).isEqualTo(previousSize-1);
+	}
+
+
+	@Property(tries = 100)
+	void pilasTupleTest(
+		@ForAll @Classes(classes = {PilaSobreListasEnlazadas.class}) @IntRange(min = 110,max = 120) PilasTuple tuple) {
+		System.out.println(tuple);
 	}
 
 	@Property(tries = 100)
