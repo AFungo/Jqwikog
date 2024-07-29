@@ -33,7 +33,7 @@ public class RandoopExperiments {
 
 	@Property(tries = 100)
 	void pilasTupleTest(
-		@ForAll @Classes(classes = {PilaSobreListasEnlazadas.class}) @IntRange(min = 110,max = 120) PilasTuple tuple) {
+		@ForAll @Deps(classes = {PilaSobreListasEnlazadas.class}) @IntRange(min = 110,max = 120) PilasTuple tuple) {
 		System.out.println(tuple);
 	}
 

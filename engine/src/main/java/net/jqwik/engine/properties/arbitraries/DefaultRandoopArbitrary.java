@@ -3,16 +3,9 @@ package net.jqwik.engine.properties.arbitraries;
 import net.jqwik.api.*;
 import net.jqwik.api.arbitraries.*;
 
-import net.jqwik.engine.properties.*;
-import net.jqwik.engine.properties.arbitraries.exhaustive.*;
 import net.jqwik.engine.properties.arbitraries.randomized.*;
-import net.jqwik.engine.properties.shrinking.*;
-
-import org.jspecify.annotations.*;
 
 import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
 
 public class DefaultRandoopArbitrary<T> extends TypedCloneable implements RandoopArbitrary<T>{
 
@@ -21,7 +14,7 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	Set<Integer> intLiterals = new HashSet<>();
 
-	Set<Class<?>> necessaryClasses = new HashSet<>();
+	Set<Class<?>> dependencies = new HashSet<>();
 
 	public DefaultRandoopArbitrary(Class<T> clazz){
 		this.clazz = clazz;
@@ -34,7 +27,7 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	@Override
 	public RandomGenerator<T> generator(int genSize) {
-		return RandomGenerators.randoop(clazz, parameterizedClasses, intLiterals, necessaryClasses);
+		return RandomGenerators.randoop(clazz, parameterizedClasses, intLiterals, dependencies);
 	}
 
 	@Override
@@ -65,9 +58,9 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 	}
 
 	@Override
-	public RandoopArbitrary<T> setNecessaryClasses(Set<Class<?>> classes) {
+	public RandoopArbitrary<T> setDependencies(Set<Class<?>> dependencies) {
 		DefaultRandoopArbitrary<T> clone = typedClone();
-		clone.necessaryClasses.addAll(classes);
+		clone.dependencies.addAll(dependencies);
 		return clone;
 	}
 }

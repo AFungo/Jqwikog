@@ -19,10 +19,10 @@ public class RandoopConfigurators extends ArbitraryConfiguratorBase {
 		return arbitrary;
 	}
 
-	public Arbitrary<?> configure(Arbitrary<?> arbitrary, Classes classes) {
+	public Arbitrary<?> configure(Arbitrary<?> arbitrary, Deps dependencies) {
 		if (arbitrary instanceof RandoopArbitrary) {
 			RandoopArbitrary<?> randoopArbitrary = (RandoopArbitrary<?>) arbitrary;
-			return randoopArbitrary.setNecessaryClasses(new HashSet<>(Arrays.asList(classes.classes())));
+			return randoopArbitrary.setDependencies(new HashSet<>(Arrays.asList(dependencies.classes())));
 		}
 		return arbitrary;
 	}

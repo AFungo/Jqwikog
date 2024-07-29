@@ -1,12 +1,7 @@
 package net.jqwik.api.randoop;
 
 import java.lang.annotation.*;
-import java.util.*;
-
 import org.apiguardian.api.*;
-
-import net.jqwik.api.constraints.*;
-
 import static org.apiguardian.api.API.Status.*;
 
 /**
@@ -17,6 +12,6 @@ import static org.apiguardian.api.API.Status.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @API(status = MAINTAINED, since = "1.0")
-public @interface Classes {
+public @interface Deps {
 	Class<?>[] classes();
 }

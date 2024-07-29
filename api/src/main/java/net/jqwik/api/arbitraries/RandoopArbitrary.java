@@ -19,5 +19,5 @@ public interface RandoopArbitrary<T> extends Arbitrary<T>{
 
 	RandoopArbitrary<T> setIntegersLiterals(int min, int max);
 
-	RandoopArbitrary<T> setNecessaryClasses(Set<Class<?>> classes);
+	RandoopArbitrary<T> setDependencies(Set<Class<?>> dependencies);
 }
