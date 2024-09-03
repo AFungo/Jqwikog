@@ -3,9 +3,11 @@ package net.jqwik.engine.properties.arbitraries;
 import net.jqwik.api.*;
 import net.jqwik.api.arbitraries.*;
 
+import net.jqwik.engine.*;
 import net.jqwik.engine.properties.arbitraries.randomized.*;
 
 import java.util.*;
+import java.util.function.*;
 
 public class DefaultRandoopArbitrary<T> extends TypedCloneable implements RandoopArbitrary<T>{
 
@@ -61,6 +63,14 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 	public RandoopArbitrary<T> setDependencies(Set<Class<?>> dependencies) {
 		DefaultRandoopArbitrary<T> clone = typedClone();
 		clone.dependencies.addAll(dependencies);
+		return clone;
+	}
+
+	Function<Object, Boolean> assume;
+	@Override
+	public RandoopArbitrary<T> setAssume(Function<Object, Boolean> function) {
+		DefaultRandoopArbitrary<T> clone = typedClone();
+		clone.assume = function;
 		return clone;
 	}
 }
