@@ -6,6 +6,8 @@ import net.jqwik.api.arbitraries.*;
 import net.jqwik.engine.*;
 import net.jqwik.engine.properties.arbitraries.randomized.*;
 
+import randoop.main.*;
+
 import java.util.*;
 import java.util.function.*;
 
@@ -29,7 +31,24 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	@Override
 	public RandomGenerator<T> generator(int genSize) {
-		return RandomGenerators.randoop(clazz, parameterizedClasses, intLiterals, dependencies);
+		Random r = SourceOfRandomness.current();
+		int seed = r.nextInt();
+		RandoopObjectGenerator rog = parameterizedClasses.isEmpty()?
+										 new RandoopObjectGenerator(clazz, seed): new RandoopObjectGenerator(clazz, parameterizedClasses, seed);
+
+		if(!intLiterals.isEmpty()){
+			rog.setCustomIntegers(intLiterals);
+		}
+
+		if(!dependencies.isEmpty()){
+			rog.setNecessaryClasses(dependencies);
+		}
+
+		if(assume != null){
+			rog.setAssume(assume);
+		}
+
+		return RandomGenerators.randoop(rog);
 	}
 
 	@Override

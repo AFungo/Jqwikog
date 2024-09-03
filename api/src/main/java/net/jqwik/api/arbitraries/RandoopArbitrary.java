@@ -4,6 +4,7 @@ import net.jqwik.api.*;
 
 
 import java.util.*;
+import java.util.function.*;
 
 public interface RandoopArbitrary<T> extends Arbitrary<T>{
 	/**

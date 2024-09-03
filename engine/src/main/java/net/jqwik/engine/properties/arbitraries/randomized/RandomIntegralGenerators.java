@@ -40,22 +40,7 @@ public class RandomIntegralGenerators {
 		};
 	}
 
-	public static <T> RandomGenerator<T> randoop(Class<T> clazz,
-												 List<Class<?>> parameterizedClasses,
-												 Set<Integer> integersLiterals,
-												 Set<Class<?>> necessaryClasses){
-		Random r = SourceOfRandomness.current();
-		int seed = r.nextInt();
-		RandoopObjectGenerator rog = parameterizedClasses.isEmpty()?
-										 new RandoopObjectGenerator(clazz, seed): new RandoopObjectGenerator(clazz, parameterizedClasses, seed);
-
-		if(!integersLiterals.isEmpty()){
-			rog.setCustomIntegers(integersLiterals);
-		}
-
-		if(!necessaryClasses.isEmpty()){
-			rog.setNecessaryClasses(necessaryClasses);
-		}
+	public static <T> RandomGenerator<T> randoop(RandoopObjectGenerator rog){
 		return random -> Shrinkable.unshrinkable(((T) rog.generate()));
 	}
 	private static void checkTargetInRange(Range<BigInteger> range, BigInteger value) {
