@@ -62,4 +62,13 @@ public class RandoopConfigurators extends ArbitraryConfiguratorBase {
 		}
 		return null;
 	}
+
+	public Arbitrary<?> configure(Arbitrary<?> arbitrary, UseMethods assumeMethod) {
+		if (arbitrary instanceof RandoopArbitrary) {
+			RandoopArbitrary<?> randoopArbitrary = (RandoopArbitrary<?>) arbitrary;
+			return randoopArbitrary.setMethodsToUse(assumeMethod.methods());
+		}
+		return arbitrary;
+	}
 }
+
