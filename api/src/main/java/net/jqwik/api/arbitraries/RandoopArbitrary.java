@@ -23,4 +23,6 @@ public interface RandoopArbitrary<T> extends Arbitrary<T>{
 	RandoopArbitrary<T> setDependencies(Set<Class<?>> dependencies);
 
 	RandoopArbitrary<T> setAssume(Function<Object, Boolean> function);
+
+	RandoopArbitrary<T> setMethodsToUse(String[] methods);
 }

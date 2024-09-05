@@ -20,6 +20,10 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	Set<Class<?>> dependencies = new HashSet<>();
 
+	Function<Object, Boolean> assume;
+
+	List<String> methods = new ArrayList<>();
+
 	public DefaultRandoopArbitrary(Class<T> clazz){
 		this.clazz = clazz;
 		this.parameterizedClasses = new ArrayList<>();
@@ -46,6 +50,10 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 		if(assume != null){
 			rog.setAssume(assume);
+		}
+
+		if(!methods.isEmpty()){
+			rog.setMethodsToUse(methods);
 		}
 
 		return RandomGenerators.randoop(rog);
@@ -85,11 +93,17 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 		return clone;
 	}
 
-	Function<Object, Boolean> assume;
 	@Override
 	public RandoopArbitrary<T> setAssume(Function<Object, Boolean> function) {
 		DefaultRandoopArbitrary<T> clone = typedClone();
 		clone.assume = function;
+		return clone;
+	}
+
+	@Override
+	public RandoopArbitrary<T> setMethodsToUse(String[] methods) {
+		DefaultRandoopArbitrary<T> clone = typedClone();
+		clone.methods.addAll(Arrays.asList(methods));
 		return clone;
 	}
 }
