@@ -18,6 +18,8 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 	Set<Integer> intLiterals = new HashSet<>();
 
+	Set<String> strLiterals = new HashSet<>();
+
 	Set<Class<?>> dependencies = new HashSet<>();
 
 	Function<Object, Boolean> assume;
@@ -42,6 +44,10 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 
 		if(!intLiterals.isEmpty()){
 			rog.setCustomIntegers(intLiterals);
+		}
+
+		if(!strLiterals.isEmpty()){
+			rog.setCustomStrings(strLiterals);
 		}
 
 		if(!dependencies.isEmpty()){
@@ -83,6 +89,13 @@ public class DefaultRandoopArbitrary<T> extends TypedCloneable implements Randoo
 		DefaultRandoopArbitrary<T> clone = typedClone();
 		clone.intLiterals = Arbitraries.integers().between(min, max).
 									   set().sample();
+		return clone;
+	}
+
+	@Override
+	public RandoopArbitrary<T> setStringsLiterals(Set<String> strings) {
+		DefaultRandoopArbitrary<T> clone = typedClone();
+		clone.strLiterals = strings;
 		return clone;
 	}
 
