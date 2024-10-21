@@ -22,6 +22,16 @@ public class RandoopConfigurators extends ArbitraryConfiguratorBase {
 		return arbitrary;
 	}
 
+	public Arbitrary<?> configure(Arbitrary<?> arbitrary, RandoopStrings strings) {
+		if (arbitrary instanceof RandoopArbitrary) {
+			RandoopArbitrary<?> randoopArbitrary = (RandoopArbitrary<?>) arbitrary;
+			return randoopArbitrary.setStringsLiterals(
+				new HashSet<String>(Arrays.asList(strings.strings()))
+			);
+		}
+		return arbitrary;
+	}
+
 	public Arbitrary<?> configure(Arbitrary<?> arbitrary, Deps dependencies) {
 		if (arbitrary instanceof RandoopArbitrary) {
 			RandoopArbitrary<?> randoopArbitrary = (RandoopArbitrary<?>) arbitrary;
