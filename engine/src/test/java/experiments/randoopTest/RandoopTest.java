@@ -3,6 +3,8 @@ package examples.randoopTest;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
 
+import net.jqwik.api.randoop.*;
+
 import org.junit.jupiter.api.*;
 
 import java.util.*;
@@ -22,7 +24,15 @@ public class RandoopTest {
 	@Property(tries = 10)
 	void stackSizeTest(@ForAll Stack<Date> stack) {
 		Assume.that(!stack.isEmpty());
-		System.out.println("Size = " + stack.size() + " " + stack);
+		int previousSize = stack.size();
+		stack.peek();
+		Assertions.assertEquals(stack.size(), previousSize);
+	}
+
+	@Property(tries = 10)
+	void pilaTest(@ForAll @RandoopStrings(strings = {"hola", "chau", "mundo"}) ArrayList<String> stack) {
+		Assume.that(!stack.isEmpty());
+		System.out.println(stack);
 		// int previousSize = stack.size();
 		// stack.peek();
 		// Assertions.assertEquals(stack.size(), previousSize);
