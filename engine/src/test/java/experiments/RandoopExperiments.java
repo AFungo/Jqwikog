@@ -1,5 +1,6 @@
 package experiments;
 
+import chess.*;
 import examples.datastructure.list.*;
 import examples.datastructure.ncl.*;
 
@@ -8,55 +9,58 @@ import examples.datastructure.set.*;
 
 import examples.datastructure.set.BitSet;
 
+import examples.datastructure.trees.*;
+
+import examples.jgrapht.*;
+
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
 
 // import org.junit.jupiter.api.*;
 import net.jqwik.api.randoop.*;
 
+import net.jqwik.api.randoop.AssumeMethod;
+
+import org.apache.commons.collections4.*;
+import org.apache.commons.collections4.trie.*;
 import org.assertj.core.api.Assertions;
+import org.graphstream.algorithm.*;
+import org.graphstream.algorithm.coloring.*;
+import org.graphstream.graph.implementations.*;
+import org.jgrapht.alg.connectivity.*;
+import org.jgrapht.alg.interfaces.*;
+import org.jgrapht.alg.spanning.*;
+import org.jgrapht.graph.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class RandoopExperiments {
 
-	@Property(tries = 100)
-	void pilasTest(
-		@ForAll @IntRange(min = 110,max = 120) PilaSobreListasEnlazadas stack) {
-		System.out.println(stack);
-		Assume.that(stack.length() > 4);
-		int previousSize = stack.length();
-		stack.pop();
-		Assertions.assertThat(stack.length()).isEqualTo(previousSize-1);
-	}
 
+
+	public static boolean oddSize(Object o){
+		PilasTuple pilasTuple = (PilasTuple) o;
+		PilaSobreListasEnlazadas pila = pilasTuple.getPila();
+		int size = pila.length();
+		return size  % 2 != 0;
+	}
 
 	@Property(tries = 100)
 	void pilasTupleTest(
-		@ForAll @Deps(classes = {PilaSobreListasEnlazadas.class}) @IntRange(min = 110,max = 120) PilasTuple tuple) {
+		@ForAll @Deps(classes = {PilaSobreListasEnlazadas.class})
+		@AssumeMethod(className = RandoopExperiments.class, methodName = "oddSize")
+		@UseMethods(methods = {"setPilas", "setNumber", "applyPush"})
+		@IntRange(min = 110,max = 120) PilasTuple tuple)
+	{
 		System.out.println(tuple);
 	}
 
-	@Property(tries = 100)
-	public void nclTest(@ForAll NodeCachingLinkedList ncl,
-						@ForAll @IntRange(min=1, max=4) Integer indexToRemove){
-		Assume.that(ncl.size() > indexToRemove);
-		Assume.that(!ncl.cacheIsFull());
-		int beforeSize = ncl.cacheSize();
-		ncl.removeIndex(indexToRemove);
-		int afterSize = ncl.cacheSize();
-		Assertions.assertThat(afterSize-1).isEqualTo(beforeSize);
-	}
 
-	@Property(tries=100)
-	public void flipTest(@ForAll BitSet bitSet,
-						 @ForAll @IntRange(min=1, max=10) int index){
-		Assume.that(index < bitSet.length());
-		boolean value = bitSet.get(index);
-		bitSet.flip(index);
 
-		Assertions.assertThat(!value).isEqualTo(bitSet.get(index));
-	}
+
+
+
 
 	@Property(tries = 100)
 	public void sortedListTest(@ForAll @IntRange(min=20, max=30) SimpleList list){
@@ -67,4 +71,6 @@ public class RandoopExperiments {
 			Assertions.assertThat(list.get(i)).isLessThanOrEqualTo(list.get(i+1));
 		}
 	}
+
+
 }
