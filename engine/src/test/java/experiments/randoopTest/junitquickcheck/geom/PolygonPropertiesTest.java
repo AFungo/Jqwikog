@@ -23,7 +23,7 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-package experiments.junitquickcheck.geom;
+package experiments.randoopTest.junitquickcheck.geom;
 
 import examples.datastructure.pila.*;
 import junitquickcheck.geom.*;

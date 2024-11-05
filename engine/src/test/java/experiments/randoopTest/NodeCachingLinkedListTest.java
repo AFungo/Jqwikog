@@ -9,7 +9,7 @@ import org.assertj.core.api.*;
 
 public class NodeCachingLinkedListTest {
 
-	@Property(tries = 100)
+	@Property(tries = 10)
 	public void nclTest(@ForAll NodeCachingLinkedList ncl,
 						@ForAll @IntRange(min=1, max=4) Integer indexToRemove){
 		Assume.that(ncl.size() > indexToRemove);

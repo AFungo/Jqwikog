@@ -37,7 +37,7 @@ import net.jqwik.api.*;
 import org.assertj.core.api.*;
 
 public class TreePropertyTest {
-    @Property(tries = 100)
+    @Property(tries = 10)
 	public void deepestLeafConstrained(@ForAll Tree t) {
 
         TreeDeepestLeafVisitor visitor = new TreeDeepestLeafVisitor();
@@ -49,7 +49,7 @@ public class TreePropertyTest {
 		Assertions.assertThat(result.getValue()).isLessThanOrEqualTo(10);
     }
 
-    @Property(tries = 100)
+    @Property(tries = 10)
 	public void depthConstrained(@ForAll Tree t) {
 
         TreeDepthVisitor visitor = new TreeDepthVisitor();

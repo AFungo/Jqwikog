@@ -33,17 +33,20 @@ import net.jqwik.api.*;
 
 import net.jqwik.api.randoop.*;
 
+import net.jqwik.engine.hooks.lifecycle.*;
+
 import org.apache.commons.collections4.Trie;
 import org.apache.commons.collections4.trie.PatriciaTrie;
-import org.assertj.core.api.*;
+import org.assertj.core.api.Assertions;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 /*
  *Experimentos extraidos de JQF
  * https://rohan.padhye.org/files/jqf-issta19.pdf
  */
-public class PatriciaTrieTest {
+public class PatriciaTrieTest{
 
 	// Array with prefixes matching more than one word
 	String[] prefixes = {
@@ -59,17 +62,16 @@ public class PatriciaTrieTest {
 	}
 
 	@Property(tries = 10)
-	public void testPrefixMap(@ForAll @RandoopStrings(strings = {"apple", "applet", "application", "banana", "bandana",
-		"blueberry", "bluefish", "grapefruit", "grapevine", "peach"})
-							  @UseMethods(methods = {"put"}) HashMap<String, Integer>  map
-		, @ForAll("prefixesProvider") String prefix) {
-		// assumeTrue(prefix.length() > 0);
+	public void testPrefixMap(@ForAll
+							  @RandoopStrings(strings = {"apple", "applet", "application", "banana", "bandana",
+														"blueberry", "bluefish", "grapefruit", "grapevine", "peach"})
+							  @UseMethods(methods = {"put"}) HashMap<String, Integer>  map,
+							  @ForAll("prefixesProvider") String prefix) {
 		// Create new trie with input `map`
 		PatriciaTrie trie = new PatriciaTrie(map);
 		// Get sub-map whose keys start with `prefix`
 		Map prefixMap = trie.prefixMap(prefix);
 		// Ensure that it contains all keys that start with `prefix`
-		System.out.println(prefixMap);
 		for (String key : map.keySet()) {
 			if (key.startsWith(prefix)) {
 				Assertions.assertThat(prefixMap.containsKey(key)).isTrue();
@@ -86,9 +88,8 @@ public class PatriciaTrieTest {
 
 	@Property(tries=100)
 	public void testCopy(@ForAll @RandoopStrings(strings = {"hola", "chau", "mundo", "hello", "bay"})
-						 @UseMethods(methods = {"put"})
-						 HashMap<String, Integer> map, @ForAll("randoopStrings") String key) {
-		System.out.println(map + " " + key);
+						 @UseMethods(methods = {"put"}) HashMap<String, Integer> map,
+						 @ForAll("randoopStrings") String key) {
 		Assume.that(map.containsKey(key));
 		// Create new trie with input `map`
 		Trie trie = new PatriciaTrie(map);
@@ -96,4 +97,16 @@ public class PatriciaTrieTest {
 		Assertions.assertThat(trie.containsKey(key)).isTrue();
 	}
 
+	// @Property(tries=100)
+	// public void testCopy(@ForAll ListItr itr){
+	// 	ListItr itrClone = clone(itr);
+	// 	itr.remove();
+	// 	itrClone.previousIndex();
+	// 	itrClone.hasNext();
+	// 	itrClone.previousIndex();
+	// 	itrClone.set(Object);
+	// 	itrClone.remove();
+	// 	itrClone.nextIndex();
+	// 	Assertions.assertThat(itr).isEquals(itrClone);
+	// }
 }

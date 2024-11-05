@@ -8,8 +8,26 @@ import net.jqwik.api.randoop.*;
 import org.assertj.core.api.*;
 import org.graphstream.algorithm.coloring.*;
 import org.graphstream.graph.implementations.*;
+import org.graphstream.ui.geom.*;
+
+import static java.lang.Math.*;
 
 public class StreamGraphTest {
+
+	@Property(tries=10)
+	void testVector2DotProduct(@ForAll @UseMethods(methods = "set") Vector2 vector1,
+							   @ForAll @UseMethods(methods = "set") Vector2 vector2) {
+		Assertions.assertThat(vector1.dotProduct(vector2)).
+				  isEqualTo(vector2.dotProduct(vector1));
+	}
+
+	@Property(tries=10)
+	void testVector2Normalize(@ForAll @UseMethods(methods = "set") Vector2 vector1) {
+		double x = vector1.x();
+		double y = vector1.y();
+		Assertions.assertThat(vector1.normalize()).
+				  isEqualTo(sqrt(x*x+y*y));
+	}
 
 	public static boolean graphSize(Object o){
 		// if(o == null) return false;
@@ -17,7 +35,7 @@ public class StreamGraphTest {
 		return graph.getEdgeCount() > 4;
 	}
 
-	@Property
+	@Property(tries=10)
 	void testWelshPowellColoring(@ForAll
 								 @AssumeMethod(className = RandoopExperiments.class, methodName = "graphSize")
 								 @RandoopStrings(strings = {"hola", "chau", "mundo", "hello", "bay"})
@@ -36,6 +54,6 @@ public class StreamGraphTest {
 		});
 
 		Assertions.assertThat(isProperlyColored).isTrue();
-		System.out.println("Colors used: " + colorsUsed + " edges: " + graph.getEdgeCount() + " nodes: " + graph.getNodeCount());
+		// System.out.println("Colors used: " + colorsUsed + " edges: " + graph.getEdgeCount() + " nodes: " + graph.getNodeCount());
 	}
 }

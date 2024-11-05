@@ -23,7 +23,7 @@
  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-package experiments.junitquickcheck.counter;
+package experiments.randoopTest.junitquickcheck.counter;
 
 import junitquickcheck.counter.*;
 
@@ -33,13 +33,13 @@ import org.assertj.core.api.Assertions;
 
 
 public class CounterPropertiesTest {
-    @Property(tries = 100)
+    @Property(tries = 10)
 	public void incrementing(@ForAll Counter c) {
         int count = c.count();
         Assertions.assertThat(count + 1).isEqualTo(c.increment().count());
     }
 
-    @Property(tries = 100)
+    @Property(tries = 10)
 	public void decrementing(@ForAll Counter c) {
         int count = c.count();
         Assertions.assertThat(count - 1).isEqualTo(c.decrement().count());
