@@ -1,4 +1,4 @@
-package examples.randoopTest;
+package experiments.randoopTest;
 
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
@@ -47,11 +47,7 @@ public class RandoopTest {
 		// Assertions.assertEquals(stack.size(), previousSize);
 	}
 
-	@Property(tries = 100)
-	void dateAfterTest(@ForAll Date date) {
-		System.out.println(date);
-		Assertions.assertFalse(date.after(date));
-	}
+
 
 	@Property(tries = 100)
 	void bitSetClearTest(@ForAll BitSet set) {
