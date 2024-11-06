@@ -65,7 +65,7 @@ public class PatriciaTrieTest{
 	public void testPrefixMap(@ForAll
 							  @RandoopStrings(strings = {"apple", "applet", "application", "banana", "bandana",
 														"blueberry", "bluefish", "grapefruit", "grapevine", "peach"})
-							  @UseMethods(methods = {"put"}) HashMap<String, Integer>  map,
+							  @UseMethods(methods = {"put"}) TreeMap<String, Integer>  map,
 							  @ForAll("prefixesProvider") String prefix) {
 		// Create new trie with input `map`
 		PatriciaTrie trie = new PatriciaTrie(map);
@@ -88,7 +88,7 @@ public class PatriciaTrieTest{
 
 	@Property(tries=100)
 	public void testCopy(@ForAll @RandoopStrings(strings = {"hola", "chau", "mundo", "hello", "bay"})
-						 @UseMethods(methods = {"put"}) HashMap<String, Integer> map,
+						 @UseMethods(methods = {"put"}) TreeMap<String, Integer> map,
 						 @ForAll("randoopStrings") String key) {
 		Assume.that(map.containsKey(key));
 		// Create new trie with input `map`

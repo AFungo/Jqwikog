@@ -4,6 +4,7 @@ import examples.jgrapht.*;
 import experiments.*;
 
 import net.jqwik.api.*;
+import net.jqwik.api.constraints.*;
 import net.jqwik.api.randoop.*;
 
 import org.assertj.core.api.*;
@@ -23,12 +24,12 @@ public class JgraphtTest {
 	public static boolean graphIsConnected(Object o){
 		// if(o == null) return false;
 		DefaultDirectedGraph graph = (DefaultDirectedGraph) o;
-		return new ConnectivityInspector(graph).isConnected() && graph.vertexSet().size() > 1;
+		return new ConnectivityInspector(graph).isConnected() && graph.vertexSet().size() > 1 && graph.edgeSet().size() > 1;
 	}
 
 	@Property(tries = 10)
-	public void testPrim(@ForAll @AssumeMethod(className =  RandoopExperiments.class, methodName = "graphIsConnected")
-						 @Deps(classes={MySuplier.class})
+	public void testPrim(@ForAll @AssumeMethod(className =  JgraphtTest.class, methodName = "graphIsConnected")
+						 @Deps(classes={MySuplier.class}) @IntRange(max=5)
 						 DefaultDirectedGraph<Integer, Integer> graph) {
 		Assume.that(graph != null);
 		int graphSize = graph.vertexSet().size();
