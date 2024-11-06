@@ -14,6 +14,7 @@ import java.util.*;
 public class AGeneratorTest {
     @Property(tries = 100)
 	public void listAreCorrectlyGenerated(@ForAll @Deps(classes = {B.class, ArrayList.class}) A a) {
+		Assume.that(a != null);
         a.getListOfB().forEach(b ->
 								   Assertions.assertThat(b).isInstanceOf(B.class));
     }

@@ -37,6 +37,8 @@ import org.assertj.core.api.*;
 public class PolygonPropertiesTest {
 
 	public static boolean polygonIsConvex(Object o){
+		if(o == null)
+			return false;
 		Polygon polygon = (Polygon) o;
 		return polygon.convex();
 	}

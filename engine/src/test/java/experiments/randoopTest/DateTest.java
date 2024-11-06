@@ -17,7 +17,7 @@ public class DateTest {
 	}
 
 	public static boolean isNewYear(Object o){
-		if(o != null){
+		if(o == null){
 			return false;
 		}
 		Date d = (Date) o;
@@ -39,7 +39,7 @@ public class DateTest {
 	}
 
 	public static boolean are31daysLongMonth(Object o){
-		if(o != null){
+		if(o == null){
 			return false;
 		}
 		Date d = (Date) o;
@@ -66,7 +66,7 @@ public class DateTest {
 	}
 
 	public static boolean are30daysLongMonth(Object o){
-		if(o != null){
+		if(o == null){
 			return false;
 		}
 		Date d = (Date) o;
@@ -87,7 +87,7 @@ public class DateTest {
 	}
 
 	public static boolean areFebruary(Object o){
-		if(o != null){
+		if(o == null){
 			return false;
 		}
 		Date d = (Date) o;
