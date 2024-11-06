@@ -26,7 +26,7 @@ public class RandoopArbitraryProvider<T> implements ArbitraryProvider {
 			return Collections.singleton(new DefaultRandoopArbitrary<>(targetType.getRawType(), clazzes));
 	}
 
-	private Integer priority = 100;
+	private Integer priority = -1;
 
 	@Override
 	public int priority() {
