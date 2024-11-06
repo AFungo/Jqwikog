@@ -61,7 +61,7 @@ public class PatriciaTrieTest{
 		return Arbitraries.of(prefixes);
 	}
 
-	@Property(tries = 10)
+	@Property(tries = 100)
 	public void testPrefixMap(@ForAll
 							  @RandoopStrings(strings = {"apple", "applet", "application", "banana", "bandana",
 														"blueberry", "bluefish", "grapefruit", "grapevine", "peach"})

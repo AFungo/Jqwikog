@@ -33,13 +33,13 @@ import org.assertj.core.api.Assertions;
 
 
 public class CounterPropertiesTest {
-    @Property(tries = 10)
+    @Property(tries = 100)
 	public void incrementing(@ForAll Counter c) {
         int count = c.count();
         Assertions.assertThat(count + 1).isEqualTo(c.increment().count());
     }
 
-    @Property(tries = 10)
+    @Property(tries = 100)
 	public void decrementing(@ForAll Counter c) {
         int count = c.count();
         Assertions.assertThat(count - 1).isEqualTo(c.decrement().count());

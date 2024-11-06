@@ -27,9 +27,10 @@ public class TreeTest {
 		return true;
 	}
 
-	@Property(tries=10)
+	@Property(tries=100)
 	public void treeContainsTest(
 		@ForAll @IntRange(min = 200, max = 300) @AssumeMethod(className = TreeTest.class, methodName = "noElementsFrom0to100InTree")
+			@UseMethods(methods = {"insert"})
 		BinaryTree b,
 		@ForAll @Size(max=100) Set<@IntRange(min=0, max=100) Integer> elements,
 		@ForAll @Size(max=100) Set<@IntRange(min=0, max=100) Integer> queries

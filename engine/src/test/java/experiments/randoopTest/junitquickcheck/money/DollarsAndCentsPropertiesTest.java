@@ -37,7 +37,7 @@ import static java.math.RoundingMode.HALF_UP;
 import java.math.BigDecimal;
 
 public class DollarsAndCentsPropertiesTest {
-    @Property(tries = 10)
+    @Property(tries = 100)
 	public void roundingDown(@ForAll BigDecimal d) {
         BigDecimal[] pieces = d.divideAndRemainder(ONE);
         BigDecimal integral = pieces[0];
@@ -54,7 +54,7 @@ public class DollarsAndCentsPropertiesTest {
             money.toBigDecimal());
     }
 
-    @Property(tries = 10)
+    @Property(tries = 100)
 	public void roundingUp(@ForAll BigDecimal d) {
         BigDecimal[] pieces = d.divideAndRemainder(ONE);
         BigDecimal integral = pieces[0];
