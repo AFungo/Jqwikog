@@ -33,7 +33,7 @@ import net.jqwik.api.*;
 import org.assertj.core.api.*;
 
 public class SegmentPropertiesTest {
-    @Property(tries=100)
+    @Property
 	public void intersectionIsSymmetric(
         @ForAll Segment a,
 		@ForAll Segment b) {

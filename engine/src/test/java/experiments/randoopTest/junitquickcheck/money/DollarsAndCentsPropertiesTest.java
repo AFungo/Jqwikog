@@ -54,7 +54,7 @@ public class DollarsAndCentsPropertiesTest {
             money.toBigDecimal());
     }
 
-    @Property(tries = 100)
+    @Property
 	public void roundingUp(@ForAll BigDecimal d) {
         BigDecimal[] pieces = d.divideAndRemainder(ONE);
         BigDecimal integral = pieces[0];

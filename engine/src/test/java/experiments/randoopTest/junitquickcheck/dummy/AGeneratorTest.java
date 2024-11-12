@@ -12,7 +12,7 @@ import org.assertj.core.api.*;
 import java.util.*;
 
 public class AGeneratorTest {
-    @Property(tries = 100)
+    @Property
 	public void listAreCorrectlyGenerated(@ForAll @Deps(classes = {B.class, ArrayList.class}) A a) {
 		Assume.that(a != null);
         a.getListOfB().forEach(b ->

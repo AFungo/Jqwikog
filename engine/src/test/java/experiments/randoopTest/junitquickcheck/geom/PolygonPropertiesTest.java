@@ -43,7 +43,7 @@ public class PolygonPropertiesTest {
 		return polygon.convex();
 	}
 
-	@Property(tries=100)
+	@Property
 	public void convexity(
 		@AssumeMethod(className = PolygonPropertiesTest.class, methodName = "polygonIsConvex")
         @ForAll Polygon polygon,

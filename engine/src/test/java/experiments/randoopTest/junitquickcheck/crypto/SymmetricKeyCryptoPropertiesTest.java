@@ -39,7 +39,7 @@ import org.assertj.core.api.*;
 import javax.security.auth.kerberos.*;
 
 public class SymmetricKeyCryptoPropertiesTest {
-    @Property(tries = 100)
+    @Property
 	public void decryptReversesEncrypt(
         @ForAll String plaintext,
 		@ForAll @Deps(classes = {KerberosPrincipal.class}) @UseMethods(methods = "getAlgorithm")  KerberosKey key)

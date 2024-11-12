@@ -61,7 +61,7 @@ public class PatriciaTrieTest{
 		return Arbitraries.of(prefixes);
 	}
 
-	@Property(tries = 100)
+	@Property
 	public void testPrefixMap(@ForAll
 							  @RandoopStrings(strings = {"apple", "applet", "application", "banana", "bandana",
 														"blueberry", "bluefish", "grapefruit", "grapevine", "peach"})
@@ -86,7 +86,7 @@ public class PatriciaTrieTest{
 		return Arbitraries.of(strings);
 	}
 
-	@Property(tries=100)
+	@Property
 	public void testCopy(@ForAll @RandoopStrings(strings = {"hola", "chau", "mundo", "hello", "bay"})
 						 @UseMethods(methods = {"put"}) TreeMap<String, Integer> map,
 						 @ForAll("randoopStrings") String key) {
@@ -97,16 +97,4 @@ public class PatriciaTrieTest{
 		Assertions.assertThat(trie.containsKey(key)).isTrue();
 	}
 
-	// @Property(tries=100)
-	// public void testCopy(@ForAll ListItr itr){
-	// 	ListItr itrClone = clone(itr);
-	// 	itr.remove();
-	// 	itrClone.previousIndex();
-	// 	itrClone.hasNext();
-	// 	itrClone.previousIndex();
-	// 	itrClone.set(Object);
-	// 	itrClone.remove();
-	// 	itrClone.nextIndex();
-	// 	Assertions.assertThat(itr).isEquals(itrClone);
-	// }
 }

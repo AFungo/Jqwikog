@@ -27,7 +27,7 @@ public class TreeTest {
 		return true;
 	}
 
-	@Property(tries=100)
+	@Property
 	public void treeContainsTest(
 		@ForAll @IntRange(min = 200, max = 300) @AssumeMethod(className = TreeTest.class, methodName = "noElementsFrom0to100InTree")
 			@UseMethods(methods = {"insert"})

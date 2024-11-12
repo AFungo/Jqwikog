@@ -27,7 +27,7 @@ public class JgraphtTest {
 		return new ConnectivityInspector(graph).isConnected() && graph.vertexSet().size() > 1 && graph.edgeSet().size() > 1;
 	}
 
-	@Property(tries = 100)
+	@Property
 	public void testPrim(@ForAll @AssumeMethod(className =  JgraphtTest.class, methodName = "graphIsConnected")
 						@UseMethods(methods = {"addEdge", "addVertex", "setEdgeSupplier", "setVertexSupplier"})
 						 @Deps(classes={MySuplier.class}) @IntRange(max=5)
