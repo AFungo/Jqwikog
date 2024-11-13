@@ -1,0 +1,41 @@
+package experiments.randoopTest.metamorphic;
+
+import examples.epa.*;
+
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.randoop.AssumeMethod;
+import org.assertj.core.api.Assertions;
+import randoop.com.google.gson.Gson;
+
+
+public class StackTest {
+
+	public static boolean EPAPrecondition(Object o){
+		if(o == null){
+			return false;
+		}
+		Stack s = (Stack) o;
+		return s.isGetEnabled() && s.isSetEnabled() && s.isRemove2Enabled();
+	}
+
+	@Property
+	public void test1(@ForAll
+					  @AssumeMethod(className = StackTest.class, methodName = "EPAPrecondition")
+						  Stack s){
+		Gson gson = new Gson();
+		Stack obj2 = gson.fromJson(gson.toJson(s), Stack.class);
+
+		s.isEmpty();
+
+		obj2.insertElementAt(new Object(),0);
+		obj2.lastElement();
+		obj2.set(0,new Object());
+		obj2.remove(0);
+
+		Assertions.assertThat(obj2).isEqualTo(s);
+
+	}
+
+
+}
