@@ -2,8 +2,6 @@ package experiments.randoopTest.metamorphic;
 
 import examples.epa.*;
 
-import experiments.randoopTest.*;
-
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 import net.jqwik.api.randoop.AssumeMethod;
@@ -12,7 +10,7 @@ import org.assertj.core.api.Assertions;
 import randoop.com.google.gson.Gson;
 
 
-public class NumberFormatStringTokenizeTest {
+public class NumberFormatStringTokenizerTest {
 
 	public static boolean EPAPrecondition(Object o){
 		if(o == null){
