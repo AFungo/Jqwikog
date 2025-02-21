@@ -51,7 +51,7 @@ public class PolygonPropertiesTest {
 		@ForAll Point q,
 		@ForAll double alpha) {
 
-
+		Assume.that(polygon != null);
 		Assume.that(polygon.contains(p));
 		Assume.that(polygon.contains(q));
 

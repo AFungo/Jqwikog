@@ -30,7 +30,7 @@ public class DateTest {
 	void changeYearTest(@ForAll
 						@AssumeMethod(className = DateTest.class, methodName = "isNewYear")
 						Date date) {
-		// Assume.that(isNewYear(date));
+		Assume.that(date != null);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int year = cal.get(Calendar.YEAR);

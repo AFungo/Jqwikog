@@ -248,6 +248,9 @@ public class ListItr implements ListIterator<Object> {
 
 	public boolean isAddEnabled() { return true; }
 
+	public boolean isModCountEquals(){
+		return this.arrayList.getModCount() == expectedModCount;
+	}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

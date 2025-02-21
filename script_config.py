@@ -1,7 +1,7 @@
 import subprocess
 import time
 
-objects_amount = 10
+objects_amount = 1000
 
 def run_experiment(script_path, file_path, timeout=60):
     start_time = time.time()
@@ -22,7 +22,7 @@ def run_experiment(script_path, file_path, timeout=60):
         if result.returncode == 0:
             print(file_path, " ", execution_time, " ", objects_amount, " si ", 60*30)
         else:
-            print(file_path, " ", "fallo", " ", result.returncode,)
+            print(file_path, " ", "fallo", " ", result.stderr)
 
     except subprocess.TimeoutExpired:
         print(file_path, " timeout ")
@@ -39,9 +39,10 @@ experiments = ["PatriciaTrieTest.testPrefixMap", "PatriciaTrieTest.testCopy",
                "junitquickcheck.money.DollarsAndCentsPropertiesTest.roundingUp",
                "BitSetTest.flipTest", "NodeCachingLinkedListTest.nclTest",
                "StreamGraphTest.testVector2DotProduct", "StreamGraphTest.testVector2Normalize", "StreamGraphTest.testWelshPowellColoring",
-               "TreeTest.treeContainsTest", "ListIterableTest.test1", "ListIterableTest.test2", "NumberFormatStringTokenizeTest.test1", "NumberFormatStringTokenizeTest.test2",
+               "TreeTest.treeContainsTest", "ListIterableTest.test1", "ListIterableTest.test2", "NumberFormatStringTokenizerTest.test1", "NumberFormatStringTokenizerTest.test2",
                "StackArTest.test1", "StackTest.test1"
                ]
+
 #"JgraphtTest.testPrim"
 
 if __name__ == '__main__':

@@ -21,7 +21,7 @@ public class ListIterableTest {
 				   itr.isHasNextEnabled() &&
 				   itr.isNextEnabled() && itr.isPreviousEnabled() &&
 				   itr.isSetEnabled() && itr.isNextIndexEnabled() &&
-				   itr.isPreviousIndexEnabled();
+				   itr.isPreviousIndexEnabled() && itr.isModCountEquals();
 	}
 
 	@Property
@@ -43,6 +43,7 @@ public class ListIterableTest {
 	public void test2(@ForAll
 					  @AssumeMethod(className = ListIterableTest.class, methodName = "EPAPrecondition")
 					  ListItr itr){
+		Assume.that(itr != null);
 		Gson gson = new Gson();
 		ListItr obj2 = gson.fromJson(gson.toJson(itr), ListItr.class);
 
