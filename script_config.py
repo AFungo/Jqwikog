@@ -39,8 +39,8 @@ experiments = ["PatriciaTrieTest.testPrefixMap", "PatriciaTrieTest.testCopy",
                "junitquickcheck.money.DollarsAndCentsPropertiesTest.roundingUp",
                "BitSetTest.flipTest", "NodeCachingLinkedListTest.nclTest",
                "StreamGraphTest.testVector2DotProduct", "StreamGraphTest.testVector2Normalize", "StreamGraphTest.testWelshPowellColoring",
-               "TreeTest.treeContainsTest", "ListIterableTest.test1", "ListIterableTest.test2", "NumberFormatStringTokenizerTest.test1", "NumberFormatStringTokenizerTest.test2",
-               "StackArTest.test1", "StackTest.test1"
+               "TreeTest.treeContainsTest", "metamorphic.ListIterableTest.test1", "metamorphic.ListIterableTest.test2", "metamorphic.NumberFormatStringTokenizerTest.test1", "metamorphic.NumberFormatStringTokenizerTest.test2",
+               "metamorphic.StackArTest.test1", "metamorphic.StackTest.test1"
                ]
 
 #"JgraphtTest.testPrim"

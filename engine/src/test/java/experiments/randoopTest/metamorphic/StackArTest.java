@@ -6,8 +6,9 @@ import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 import net.jqwik.api.randoop.AssumeMethod;
 import org.assertj.core.api.Assertions;
-import randoop.com.google.gson.Gson;
+import randoop.com.google.gson.*;
 
+import java.lang.reflect.*;
 
 public class StackArTest {
 
@@ -25,7 +26,15 @@ public class StackArTest {
 	public void test1(@ForAll
 					  @AssumeMethod(className = StackArTest.class, methodName = "EPAPrecondition")
 						  StackAr s){
-		Gson gson = new Gson();
+		// Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+						.registerTypeAdapter(Class.class, new JsonSerializer<Class>() {
+							@Override
+							public JsonElement serialize(Class src, Type typeOfSrc, JsonSerializationContext context) {
+								return new JsonPrimitive(src.getName());
+							}
+						})
+						.create();
 		StackAr obj2 = gson.fromJson(gson.toJson(s), StackAr.class);
 
 		s.topAndPop();
