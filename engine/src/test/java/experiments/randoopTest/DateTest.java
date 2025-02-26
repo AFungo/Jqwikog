@@ -111,7 +111,7 @@ public class DateTest {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int day = cal.get(Calendar.DAY_OF_MONTH);
-		Assertions.assertThat(day).isLessThanOrEqualTo(30);
+		Assertions.assertThat(day).isLessThanOrEqualTo(29);
 		Assertions.assertThat(day).isGreaterThanOrEqualTo(1);
 	}
 }

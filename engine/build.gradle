@@ -96,7 +96,7 @@ test {
 dependencies {
 	//JQF
 //	implementation 'org.lichess:scalachess_2.12:8.6.8'
-//	implementation	'org.jgrapht:jgrapht-core:1.5.2'
+	implementation	'org.jgrapht:jgrapht-core:1.5.2'
 	implementation 'org.graphstream:gs-algo:2.0'
 	implementation 'org.apache.commons:commons-collections4:4.4'
 	implementation 'org.apache.maven:maven-model:3.8.6'
