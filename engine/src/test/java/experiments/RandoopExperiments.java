@@ -2,14 +2,8 @@ package experiments;
 
 import examples.datastructure.list.*;
 
-import examples.datastructure.pila.*;
-
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
-
-import net.jqwik.api.randoop.*;
-
-import net.jqwik.api.randoop.AssumeMethod;
 
 import org.assertj.core.api.Assertions;
 

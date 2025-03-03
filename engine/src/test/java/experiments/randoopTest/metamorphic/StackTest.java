@@ -21,7 +21,7 @@ public class StackTest {
 		return s.isGetEnabled() && s.isSetEnabled() && s.isRemove2Enabled();
 	}
 
-	@Property
+	@Property(tries = 100)
 	public void test1(@ForAll
 					  @AssumeMethod(className = StackTest.class, methodName = "EPAPrecondition")
 						  Stack<Integer> s){

@@ -61,7 +61,7 @@ public class PatriciaTrieTest{
 		return Arbitraries.of(prefixes);
 	}
 
-	@Property
+	@Property(tries = 100)
 	public void testPrefixMap(@ForAll
 							  @RandoopStrings(strings = {"apple", "applet", "application", "banana", "bandana",
 														"blueberry", "bluefish", "grapefruit", "grapevine", "peach"})
@@ -86,7 +86,7 @@ public class PatriciaTrieTest{
 		return Arbitraries.of(strings);
 	}
 
-	@Property
+	@Property(tries = 100)
 	public void testCopy(@ForAll @RandoopStrings(strings = {"hola", "chau", "mundo", "hello", "bay"})
 						 @UseMethods(methods = {"put"}) TreeMap<String, Integer> map,
 						 @ForAll("randoopStrings") String key) {

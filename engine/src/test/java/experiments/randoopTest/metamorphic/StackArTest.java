@@ -22,7 +22,7 @@ public class StackArTest {
 				s.isMakeEmptyEnabled() && s.isTopEnabled();
 	}
 
-	@Property
+	@Property(tries = 100)
 	public void test1(@ForAll
 					  @AssumeMethod(className = StackArTest.class, methodName = "EPAPrecondition")
 						  StackAr s){

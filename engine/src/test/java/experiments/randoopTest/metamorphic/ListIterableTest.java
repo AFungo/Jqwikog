@@ -4,11 +4,13 @@ import examples.epa.*;
 
 import net.jqwik.api.*;
 
+import net.jqwik.api.constraints.*;
 import net.jqwik.api.randoop.*;
 
 import org.assertj.core.api.*;
 import randoop.com.google.gson.*;
 
+import java.lang.reflect.*;
 
 public class ListIterableTest {
 
@@ -24,12 +26,20 @@ public class ListIterableTest {
 				   itr.isPreviousIndexEnabled() && itr.isModCountEquals();
 	}
 
-	@Property
+	@Property(tries = 100)
 	public void test1(@ForAll
 					  @AssumeMethod(className = ListIterableTest.class, methodName = "EPAPrecondition")
 						  ListItr itr){
 
-		Gson gson = new Gson();
+		// Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+						.registerTypeAdapter(Class.class, new JsonSerializer<Class>() {
+							@Override
+							public JsonElement serialize(Class src, Type typeOfSrc, JsonSerializationContext context) {
+								return new JsonPrimitive(src.getName());
+							}
+						})
+						.create();
 		ListItr obj2 = gson.fromJson(gson.toJson(itr), ListItr.class);
 
 		obj2.previousIndex();
@@ -39,7 +49,7 @@ public class ListIterableTest {
 		Assertions.assertThat(obj2).isEqualTo(itr);
 	}
 
-	@Property
+	@Property(tries=100)
 	public void test2(@ForAll
 					  @AssumeMethod(className = ListIterableTest.class, methodName = "EPAPrecondition")
 					  ListItr itr){

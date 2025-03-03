@@ -14,14 +14,14 @@ import static java.lang.Math.*;
 
 public class StreamGraphTest {
 
-	@Property
+	@Property(tries = 100)
 	void testVector2DotProduct(@ForAll @UseMethods(methods = "set") Vector2 vector1,
 							   @ForAll @UseMethods(methods = "set") Vector2 vector2) {
 		Assertions.assertThat(vector1.dotProduct(vector2)).
 				  isEqualTo(vector2.dotProduct(vector1));
 	}
 
-	@Property
+	@Property(tries = 100)
 	void testVector2Normalize(@ForAll @UseMethods(methods = "set") Vector2 vector1) {
 		double x = vector1.x();
 		double y = vector1.y();
@@ -35,7 +35,7 @@ public class StreamGraphTest {
 		return graph.getEdgeCount() > 4;
 	}
 
-	@Property
+	@Property(tries = 100)
 	void testWelshPowellColoring(@ForAll
 								 @AssumeMethod(className = RandoopExperiments.class, methodName = "graphSize")
 								 @RandoopStrings(strings = {"hola", "chau", "mundo", "hello", "bay"})

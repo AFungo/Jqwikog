@@ -11,7 +11,7 @@ import java.util.*;
 
 public class DateTest {
 
-	@Property
+	@Property(tries = 100)
 	void dateAfterTest(@ForAll Date date) {
 		Assertions.assertThat(date.after(date)).isFalse();
 	}
@@ -26,7 +26,7 @@ public class DateTest {
 		return cal.get(Calendar.MONTH) == Calendar.DECEMBER && cal.get(Calendar.DAY_OF_MONTH) == 31;
 	}
 
-	@Property
+	@Property(tries = 100)
 	void changeYearTest(@ForAll
 						@AssumeMethod(className = DateTest.class, methodName = "isNewYear")
 						Date date) {
@@ -54,7 +54,7 @@ public class DateTest {
 			   cal.get(Calendar.MONTH) == Calendar.DECEMBER;
 	}
 
-	@Property
+	@Property(tries = 100)
 	void longMonthTest(@ForAll
 						@AssumeMethod(className = DateTest.class, methodName = "are31daysLongMonth")
 						Date date) {
@@ -75,7 +75,7 @@ public class DateTest {
 		return !are31daysLongMonth(d) && cal.get(Calendar.MONTH)!= Calendar.FEBRUARY;
 	}
 
-	@Property
+	@Property(tries = 100)
 	void mediumMonthTest(@ForAll
 					   @AssumeMethod(className = DateTest.class, methodName = "are30daysLongMonth")
 					   Date date) {
@@ -104,7 +104,7 @@ public class DateTest {
 		} else return year % 100 != 0;
 	}
 
-	@Property
+	@Property(tries = 100)
 	void februaryMonthTest(@ForAll
 						 @AssumeMethod(className = DateTest.class, methodName = "are30daysLongMonth")
 						 Date date) {

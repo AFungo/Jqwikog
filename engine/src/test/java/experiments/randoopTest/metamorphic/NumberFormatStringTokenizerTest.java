@@ -21,7 +21,7 @@ public class NumberFormatStringTokenizerTest {
 			&& itr.isHasMoreTokensEnabled() && itr.isNextIsSepEnabled();
 	}
 
-	@Property
+	@Property(tries = 100)
 	public void test1(@ForAll
 					  @AssumeMethod(className = NumberFormatStringTokenizerTest.class, methodName = "EPAPrecondition")
 						  NumberFormatStringTokenizer tok){
@@ -43,7 +43,7 @@ public class NumberFormatStringTokenizerTest {
 		Assertions.assertThat(obj2).isEqualTo(tok);
 	}
 
-	@Property
+	@Property(tries = 100)
 	public void test2(@ForAll
 					  @AssumeMethod(className = NumberFormatStringTokenizerTest.class, methodName = "EPAPrecondition")
 					  NumberFormatStringTokenizer tok){

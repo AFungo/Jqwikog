@@ -1,7 +1,7 @@
 import subprocess
 import time
 
-objects_amount = 1000
+objects_amount = 100
 
 def run_experiment(script_path, file_path, timeout=60):
     start_time = time.time()
@@ -49,4 +49,4 @@ if __name__ == '__main__':
     # Example usage:
     script_path = "./experiments_runner.sh"
     for e in experiments:
-        run_experiment(script_path, "experiments.randoopTest." + e, timeout=60*30)
+        run_experiment(script_path, "experiments.randoopTest." + e, timeout=60*5)

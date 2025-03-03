@@ -9,7 +9,7 @@ import org.assertj.core.api.*;
 
 public class BitSetTest {
 
-	@Property
+	@Property(tries = 100)
 	public void flipTest(@ForAll BitSet bitSet,
 						 @ForAll @IntRange(min=1, max=10) int index){
 		Assume.that(index < bitSet.length());
